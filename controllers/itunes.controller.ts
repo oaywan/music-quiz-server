@@ -1,4 +1,4 @@
-import { IITunesSearch } from "../lib/interfaces/itunes-search.interface";
+import { IITunesSearch } from "../lib";
 const baseUrl = 'https://itunes.apple.com/search';
 
 export const iTunesSearch = async ({
