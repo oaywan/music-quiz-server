@@ -4,7 +4,7 @@ import { serveStaticOptions } from './config/express/serve-static';
 import { routes } from './config/express/routes';
 const port = process.env.port || 3000;
 const app = express();
-
+console.log('test github name')
 console.log('starting music quiz server...');
 app.use(routes);
 app.use(express.static(path.join(__dirname, 'public'), serveStaticOptions));
