@@ -1,4 +1,4 @@
-export enum EITunesMediaType {
+export enum EITunesMedia {
     Music = "music",
     Movie = "movie",
     Podcast = "podcast",

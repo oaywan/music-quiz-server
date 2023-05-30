@@ -1,12 +1,18 @@
 import { IITunesSearch } from "../lib";
+import { constructUrl } from "../utils";
 const baseUrl = 'https://itunes.apple.com/search';
 
-export const iTunesSearch = async ({
+export const searchSongs = async ({
     term,
-    mediaType,
     limit,
 }: IITunesSearch) => {
-    const res = await fetch(`${baseUrl}?term=${encodeURIComponent(term)}&media=${mediaType}&limit=${limit}`);
+    const url = constructUrl(baseUrl, {
+        term,
+        limit: limit.toString(),
+        media: 'music',
+        entity: 'song',
+    });
+    const res = await fetch(url);
     const data = await res.json();
     if (!data.results?.length) throw new Error('No results found');
     return data.results;

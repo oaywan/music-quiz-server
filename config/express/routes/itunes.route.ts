@@ -1,20 +1,23 @@
-import { Router } from 'express';
-import { EITunesMediaType } from '../../../lib';
-import { iTunesSearch } from '../../../controllers/itunes.controller';
+import express from 'express';
+import { EITunesMedia } from '../../../lib';
+import { searchSongs } from '../../../controllers/itunes.controller';
 const defaultLimit = 10;
 
-export const iTunesRoute = Router(({ mergeParams: true }))
-    .get('/:term', async ({ params: { term } }, res, next) => {
-        try {
-            if (!term) throw new Error('Unable to search without a search term');
-            const results = await iTunesSearch({
-                term,
-                limit: defaultLimit,
-                mediaType: EITunesMediaType.Music
-            });
-            results.map()
-            res.send(results);
-        } catch (err) {
-            next(err);
-        }
-    });
+const iTunesRoute = express.Router(({ mergeParams: true }));
+iTunesRoute.get('/:term', async (req, res, next) => {
+    const { params: { term } } = req;
+
+    try {
+        if (!term) throw new Error('Unable to search without a search term');
+        const results = await searchSongs({
+            term,
+            limit: defaultLimit,
+        });
+        results.map()
+        res.send(results);
+    } catch (err) {
+        next(err);
+    }
+});
+
+export { iTunesRoute };

@@ -1,6 +1,8 @@
-import express from "express";
+import express from 'express';
 
-export const gameRoute = express.Router({ mergeParams: true })
-    .get('/', (req, res, next) => {
-        res.send('game route');
-    })
+const gameRoute = express.Router({ mergeParams: true });
+gameRoute.get('/', (req, res, next) => {
+    res.send('game route');
+})
+
+export { gameRoute };
